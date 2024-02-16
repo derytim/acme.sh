@@ -209,6 +209,10 @@ _use_container_role() {
 _use_instance_role() {
   _url="http://169.254.169.254/latest/meta-data/iam/security-credentials/"
   _debug "_url" "$_url"
+  echo "test output *******"
+  debug_output=$(_get "$_url" true 1 | _head_n 1 )
+  echo "debug_output is $debug_output"
+
   if ! _get "$_url" true 1 | _head_n 1 | grep -Fq 200; then
     _debug "Unable to fetch IAM role from instance metadata"
     return 1
